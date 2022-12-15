@@ -1,48 +1,35 @@
-let img = {
-  "0": "./img/0.jpg",
-  "1": "./img/1.jpg",
-  "2": "./img/2.jpg",
-  "3": "./img/3.jpg",
-  "4": "./img/4.jpg",
-  "5": "./img/5.jpg",
-  "6": "./img/6.jpg",
-  "7": "./img/7.jpg",
-  "8": "./img/8.jpg",
-  "9": "./img/9.jpg",
-  ":": "./img/colon.jpg",
-}
+let img = ["./img/0.jpg", "./img/1.jpg", "./img/2.jpg", "./img/3.jpg","./img/4.jpg","./img/5.jpg","./img/6.jpg","./img/7.jpg","./img/8.jpg","./img/9.jpg"]
 
 function digitalClock() {
   let date = new Date();
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let seconds = date.getSeconds();
+  let hours = String(date.getHours());
+  let minutes = String(date.getMinutes());
+  let seconds = String(date.getSeconds());
 
-  if(hours < 10){
-    hours = '0'+ hours;
-  }
-  if(minutes < 10){
-    minutes = '0'+ minutes;
-  }
- 
-  if(seconds < 10){
-    seconds = '0'+ seconds;
-  }
+  let hour1 = document.querySelector('.hour1');
+  let hour2 = document.querySelector('.hour2');
+  let minut1 = document.querySelector('.minut1');
+  let minut2 = document.querySelector('.minut2');
+  let seconds1 = document.querySelector('.seconds1');
+  let seconds2 = document.querySelector('.seconds2');
 
-  let string = hours + ":" + minutes + ":" + seconds;
-
-  document.getElementById('id_clock').innerHTML = '';
-
-  for (let i = 0; i < string.length; i++) {
-    const photoTime = document.createElement('img');
-    photoTime.src = img[string[i]];
-    photoTime.style.width = '100px';
-    photoTime.style.height = '100px';
-    document.getElementById('id_clock').appendChild(photoTime);
-  }
+  createTime(hour1, hour2, hours);
+  createTime(minut1, minut2, minutes);
+  createTime(seconds1, seconds2, seconds);
 
   setTimeout(digitalClock, 1000);
 }
 
+
+function createTime(numberTime1, numberTime2, timeType){
+  if(timeType < 10){
+    numberTime1.src = img[0];
+    numberTime2.src = img[timeType.charAt(0)];
+  }
+  else{
+    numberTime1.src = img[timeType.charAt(0)];
+    numberTime2.src = img[timeType.charAt(1)];
+  }
+}
 
 digitalClock();
